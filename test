@@ -1,0 +1,8 @@
+./geth 
+    --datadir node1/ 
+    --syncmode 
+     --networkid (any_numbers) 
+     --rpc 
+     --minerthreads 1 
+     --unlock  --password node1/password.txt
+    --mine --allow-insecure-unlock 
