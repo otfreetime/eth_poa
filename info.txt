@@ -1,18 +1,24 @@
-geth --datadir node1/ account new
+
+
+
+Create the accounts:
+        geth --datadir node/ account new
+        
+        geth --datadir bootnode/ account new
+        geth --datadir miner/ account new
+        
 
 puppeth
 
 
-Initialize and create node1:
-geth --datadir node1/ init genesis.json
+Create genesis blocks for each Node:
+        geth --datadir data/node/ init genesis.json
+        geth --datadir data/bootnode/ init genesis.json
+        geth --datadir data/miner/ init genesis.json
 
-
-node 1 enode:
-enode://447e358bc80c309163ac5d30f237c6d75c661b86e3ac09a83f7b40b329d496917a9192b442e7c4ac69d4916abb4f770295dc10069867b518eab5348c861a085b@127.0.0.1:30310
-
-node 2 enode:
-enode://6ffd0135134b333f35cd1734fc3263dafa7aae11104a0e13d59fb1ac3325c1e51fc7f714959ead23ad5dc4a67b932e8f984a1d5d548aa7f0e884fc2e235f2281@127.0.0.1:30311
-
+bootnode:
+    bootnode -genkey boot.key
+    bootnode -nodekey boot.key -verbosity 9 -addr :30310
 
 
 geth attach http://localhost:8545
@@ -20,8 +26,8 @@ geth attach http://localhost:8545
 To make sure all the Geth Services are running, check the processes: 
 ps aux | grep geth
 
-web3.fromWei(eth.getBalance("0x703b3d36f6d86FB3EF2C93Cc19DE11234d3C968c"),  "ether")
-web3.fromWei(eth.getBalance("0x0000000000000000000000000000000000000001"),  "ether")
+web3.fromWei(eth.getBalance("0xaeb069b8ea331670cb9d943bdfc43f64e188d344"),  "ether")
+web3.fromWei(eth.getBalance("0xd15c54eb169ab3333577b56ef9b3a77bb1d02abd"),  "ether")
 web3.fromWei(eth.getBalance("0x703b3d36f6d86fb3ef2c93cc19de11234d3c968c"),  "ether")
 
 1- the connectivity of the nodes:
@@ -66,7 +72,7 @@ curl --location --request POST 'localhost:8545' \
     "id": 4,
     "method": "eth_getBalance",
     "params": [
-        "0x703b3d36f6d86fb3ef2c93cc19de11234d3c968c",
+        "0x513ededa7a66d181e3b7a14add8d23112664a107",
         "latest"
     ]
 }'
@@ -79,7 +85,7 @@ curl --location --request POST 'http://localhost:8545' \
     "id": 5,
     "method": "personal_newAccount",
     "params": [
-        "5uper53cr3t"
+        "password"
     ]
 }'
 
@@ -123,8 +129,8 @@ curl --location --request POST 'localhost:8545' \
     "method": "eth_sendTransaction",
     "params": [
         {
-            "from": "0x703b3d36f6d86FB3EF2C93Cc19DE11234d3C968c",
-            "to": "0x6e8a64F73F7676efaaf30fFB5c3b26ea53C953Bf",
+            "from": "0xAEb069b8EA331670cB9D943BDfc43F64e188d344",
+            "to": "0xe2cc198055e41759764b992a3d2b73959b3b8e46",
             "value": "0xf4240"
         }
     ]
@@ -139,7 +145,7 @@ curl --location --request POST 'localhost:8545' \
     "jsonrpc": "2.0",
     "id": 8,
     "method": "eth_getTransactionByHash",
-    "params": [ "0x5e8fe88a2c98acbe0c6867072fa429eb17bea1e43470f9ab2f65424bacaea34d" ]
+    "params": [ "0x4dbaf5e4e28300f0747864ffa80bcf263f2806285bc55e7478dd462fe66e97e3" ]
 }'
 
 9. Lastly, verify if we get the fund in the recipient’s account:
@@ -150,7 +156,7 @@ curl --location --request POST 'localhost:8545' \
     "id": 9,
     "method": "eth_getBalance",
     "params": [
-        "0x5b6cf1dd9a038554c3e0283c92b754701b01479b",
+        "0xe2cc198055e41759764b992a3d2b73959b3b8e46",
         "latest"
     ]
 }'

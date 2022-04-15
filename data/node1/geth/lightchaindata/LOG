@@ -1,0 +1,8 @@
+=============== Apr 15, 2022 (+03) ===============
+03:21:26.100060 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+03:21:26.113698 db@open opening
+03:21:26.114828 version@stat F·[] S·0B[] Sc·[]
+03:21:26.121672 db@janitor F·2 G·0
+03:21:26.121672 db@open done T·7.9739ms
+03:21:26.137787 db@close closing
+03:21:26.138330 db@close done T·542.6µs
